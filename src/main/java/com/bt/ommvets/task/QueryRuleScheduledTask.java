@@ -26,6 +26,7 @@ public class QueryRuleScheduledTask {
 
     @Autowired
     private WorkorderService workorderService;
+
     @Autowired
     private WorkorderAutoRuleService workorderAutoRuleService;
 
@@ -41,9 +42,12 @@ public class QueryRuleScheduledTask {
 
     @Scheduled(fixedRate = 5000)
     public void createSheduleWorkorder() {
-        List<WorkorderAutoRule> autoRules = workorderAutoRuleService.findAllNoUsedAutoRule();
+        List<WorkorderAutoRule> autoRules = workorderAutoRuleService.findAllAutoRule();
         for (WorkorderAutoRule rule : autoRules) {
-            if (rule.getAutoType()==WorkorderAutoRule.AUTOTYPE_ONCE&&futureMap.get(rule.getId())==null){//一次定时任务
+
+            if (rule.getAutoType()==WorkorderAutoRule.AUTOTYPE_ONCE
+                    &&rule.getScheduledTime().after(new Date())
+                    &&futureMap.get(rule.getId())==null){//一次定时任务
 
                 Date scheduledTime = rule.getScheduledTime();
                 cal.setTime(scheduledTime);
@@ -53,15 +57,16 @@ public class QueryRuleScheduledTask {
                 int hour=cal.get(Calendar.HOUR_OF_DAY);
                 int minute= cal.get(Calendar.MINUTE);
                 int second= cal.get(Calendar.SECOND);
-                System.out.println(year+" "+month+" "+day+" "+hour+" "+minute+" "+second);
+                System.out.println("一次定时："+year+" "+month+" "+day+" "+hour+" "+minute+" "+second);
                 String cron =second+" "+minute+" "+hour+" "+day+" "+month+" ?";//"0 33 21 13 5 ?";
 
                 ScheduledFuture<?> future=threadPoolTaskScheduler.schedule(new MyRunnable(rule), new CronTrigger(cron));
                 futureMap.put(rule.getId(),future);
             }
-            if (rule.getAutoType()==WorkorderAutoRule.AUTOTYPE_CIRCLE&&futureMap.get(rule.getId())==null){//一次定时任务
+            if (rule.getAutoType()==WorkorderAutoRule.AUTOTYPE_CIRCLE
+                    &&futureMap.get(rule.getId())==null){//一次定时任务
 
-                Date scheduledTime = rule.getScheduledTime();
+                Date scheduledTime = rule.getCycleStart();
                 cal.setTime(scheduledTime);
                 int year = cal.get(Calendar.YEAR);
                 int month=cal.get(Calendar.MONTH)+1;
@@ -71,8 +76,8 @@ public class QueryRuleScheduledTask {
                 int second= cal.get(Calendar.SECOND);
 
                 int circleType=rule.getCycleType();
-
-                String cron =second+" "+minute+" "+hour+" "+day+"/"+circleType*7+" * ?";//"0 33 21 13 5 ?";
+                System.out.println("循环定时："+year+" "+month+" "+day+" "+hour+" "+minute+" "+second);
+                String cron =second+" "+minute+" "+hour+" "+day+"/"+circleType+" * ?";//"0 33 21 13 5 ?";
 
                 ScheduledFuture<?> future=threadPoolTaskScheduler.schedule(new MyRunnable(rule), new CronTrigger(cron));
                 futureMap.put(rule.getId(),future);
@@ -87,7 +92,9 @@ public class QueryRuleScheduledTask {
         }
         @Override
         public void run() {
+            System.out.println("开始插入定时工单了。。。good luck to you ！");
             workorderService.addWorkorderByAutoRule(rule);
+            System.out.println("插入工单成功，success！");
         }
     }
 }

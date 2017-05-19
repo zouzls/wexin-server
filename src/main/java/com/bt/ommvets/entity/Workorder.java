@@ -17,7 +17,6 @@ public class Workorder  implements Serializable{
 	private Date createTime;		// 创建工单时间
 	private String workorderRemark;		// 备注
 
-
 	private String stationId;		// 站点id
 	private String deviceId;		// 设备id
 	private String currentFlowId;		// 当前流程id
@@ -115,4 +114,5 @@ public class Workorder  implements Serializable{
 	public void setWorkorderRemark(String workorderRemark) {
 		this.workorderRemark = workorderRemark;
 	}
+
 }

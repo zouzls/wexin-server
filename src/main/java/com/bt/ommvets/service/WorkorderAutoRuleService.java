@@ -21,7 +21,7 @@ public class WorkorderAutoRuleService {
         return autoworkorderRuleDao.findById(id);
     }
 
-    public List<WorkorderAutoRule> findAllNoUsedAutoRule(){
-        return autoworkorderRuleDao.findAllByNoUsed();
+    public List<WorkorderAutoRule> findAllAutoRule(){
+        return autoworkorderRuleDao.findAll();
     }
 }

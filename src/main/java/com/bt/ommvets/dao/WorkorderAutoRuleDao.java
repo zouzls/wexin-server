@@ -54,6 +54,6 @@ public interface WorkorderAutoRuleDao {
             @Result(property ="delFlag", column = "del_flag"),
             @Result(property ="hasUsed", column = "has_used")
     })
-    @Select("SELECT * FROM WORKORDER_AUTO_RULE WHERE del_flag = '0' and avail_flag='1' and has_used='0' ")
-    List<WorkorderAutoRule> findAllByNoUsed();
+    @Select("SELECT * FROM WORKORDER_AUTO_RULE WHERE del_flag = '0' and avail_flag='1' ")
+    List<WorkorderAutoRule> findAll();
 }

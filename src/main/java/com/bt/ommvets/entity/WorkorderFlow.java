@@ -4,6 +4,7 @@
 package com.bt.ommvets.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 工单流程Entity
@@ -14,6 +15,7 @@ public class WorkorderFlow implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String id;
+	private Date createDate;
 	private String operationMemo;		// 操作备注
 	private Integer operationType=0;		// 操作类型
 	private String workorderId;		// 工单id
@@ -81,5 +83,13 @@ public class WorkorderFlow implements Serializable {
 
 	public void setDelFlag(String delFlag) {
 		this.delFlag = delFlag;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 }

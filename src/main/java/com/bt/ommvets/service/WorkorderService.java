@@ -42,9 +42,10 @@ public class WorkorderService {
 
         //添加流程
         WorkorderFlow workorderFlow=new WorkorderFlow();
-        workorderFlow.setId(IdGen.uuid());
+        workorderFlow.setId(workorder.getCurrentFlowId());
+        workorderFlow.setCreateDate(workorder.getCreateTime());
         workorderFlow.setOperateUser(rule.getCreateUserId());
-        workorderFlow.setReceiveUserId(rule.getCreateUserId());
+        workorderFlow.setReceiveUserId(rule.getReceiveUserId());
         workorderFlow.setOperationMemo(rule.getRemark());
         workorderFlow.setWorkorderId(workorder.getId());
         workorderFlowDao.add(workorderFlow);

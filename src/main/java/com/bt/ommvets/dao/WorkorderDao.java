@@ -20,7 +20,6 @@ public interface WorkorderDao {
             @Result(property = "createUserId", column = "create_user_id"),
             @Result(property = "createTime", column = "create_time"),
             @Result(property = "workorderRemark", column = "workorder_remark"),
-            @Result(property = "workorderStatus", column = "workorder_status"),
             @Result(property = "stationId", column = "station_id"),
             @Result(property = "deviceId", column = "device_id"),
             @Result(property = "delFlag", column = "del_flag")
@@ -30,8 +29,18 @@ public interface WorkorderDao {
 
 
     @Insert("INSERT INTO WORKORDER" +
-            "(id,workorder_type,status,priority,create_user_id,create_time,workorder_remark, workorder_status,station_id,device_id,del_flag) " +
+            "(id,workorder_type,status,priority,create_user_id,create_time,workorder_remark,station_id,device_id,current_flow_id,del_flag) " +
             "VALUES" +
-            "(#{id}, #{workorderType},#{status},#{priority},#{createUserId},#{createTime},#{workorderRemark},,#{workorderStatus},#{stationId},#{deviceId},#{delFlag})")
+            "(#{id}, " +
+            "#{workorderType}," +
+            "#{status}," +
+            "#{priority}," +
+            "#{createUserId}," +
+            "#{createTime}," +
+            "#{workorderRemark}," +
+            "#{stationId}," +
+            "#{deviceId}," +
+            "#{currentFlowId}," +
+            "#{delFlag})")
     int add(Workorder workorder);
 }

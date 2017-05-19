@@ -14,9 +14,9 @@ import org.springframework.stereotype.Repository;
 public interface WorkorderFlowDao {
 
 
-    @Insert("INSERT INTO workorder_flow(id,create_date,operation_memo,operation_type,"
+    @Insert("INSERT INTO WORKORDER_FLOW(id,create_date,operation_memo,operation_type,"
             +"workorder_id, operate_user_id,receive_user_id,del_flag)"
-            +") VALUES ("
+            +"VALUES ("
             +"#{id},"
             +"#{createDate},"
             +"#{operationMemo},"
