@@ -92,7 +92,7 @@ public class QueryRuleScheduledTask {
         }
         @Override
         public void run() {
-            System.out.println("开始插入定时工单了。。。good luck to you ！");
+            System.out.println("开始插入定时工单了。。。。。。good luck to you ！");
             workorderService.addWorkorderByAutoRule(rule);
             System.out.println("插入工单成功，success！");
         }
