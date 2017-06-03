@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.bt.ommvets</groupId>
-	<artifactId>auto-workorder</artifactId>
+	<artifactId>wexin-server</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
@@ -67,6 +67,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.2.5</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -74,6 +84,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<includeSystemScope>
+						true
+					</includeSystemScope>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
