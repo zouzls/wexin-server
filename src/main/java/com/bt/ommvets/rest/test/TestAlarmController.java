@@ -13,11 +13,22 @@ import java.util.HashMap;
  */
 public class TestAlarmController {
     public static void main(String[] args) throws IOException {
+        //测试发送信息接口
+        //HashMap<String,Object> params=new HashMap<>();
+        //params.put("touser","zouzls|hz-09230809|17671786096|saru_Fushimi|maomuS");
+        //params.put("content","test45.76.222.18。。。");
+        //JsonNode paramNode= ParseUtil.parseObjectToJsonNode(params);
+        //String res= HttpUtil.executePost("http://45.76.222.18:8080/v1/weixin/alarm/send",paramNode.toString());
+        //System.out.println(res);
+
+        //测试添加报警接收用户接口
         HashMap<String,Object> params=new HashMap<>();
-        params.put("touser","zouzls|hz-09230809|17671786096|saru_Fushimi|maomuS");
-        params.put("content","公元2017年6月3号，这是来自地球遥测运维系统-微信消息发送service的信息，你收到了，很幸运，你见证了这一刻。。。");
-        JsonNode paramNode=ParseUtil.parseObjectToJsonNode(params);
-        String res=HttpUtil.executePost("http://192.168.4.148:8080//v1/weixin/alarm/send",paramNode.toString());
+        params.put("weixin_no","maomuS");
+        params.put("name","谢丹阳");
+        params.put("mobile","13027140159");
+        JsonNode paramNode= ParseUtil.parseObjectToJsonNode(params);
+        String res= HttpUtil.executePost("http://localhost:8080/v1/weixin/alarm/user/create",paramNode.toString());
         System.out.println(res);
+
     }
 }

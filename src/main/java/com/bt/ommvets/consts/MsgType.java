@@ -36,16 +36,5 @@ public class MsgType {
 	// ---------设备相关
 	// 消息
 	public static final String DEVICE_TEXT = "device_text";
-	// 事件
-	public static final String DEVICE_EVENT = "device_event";
-
-	// 设备具体事件类型
-	public static class DeviceEvent {
-		public static final String UNBIND = "unbind";
-		public static final String BIND = "bind";
-	}
-
-	// 社交功能
-	public static final String HARDWARE = "hardware";
 
 }

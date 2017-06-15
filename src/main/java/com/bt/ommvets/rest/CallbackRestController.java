@@ -26,7 +26,7 @@ import java.util.Map;
 
 
 @Controller
-public class CallbackController {
+public class CallbackRestController {
 	@Autowired
 	private CallbackService callbackService;
 

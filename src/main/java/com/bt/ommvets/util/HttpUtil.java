@@ -23,14 +23,13 @@ public class HttpUtil {
 	//private static Logger logger = Logger.getLogger(HttpUtil.class);
 
 
-	public static String executeGetToken(String url) {
+	public static String executeGet(String url) {
 		String resultContent = null;
 		try {
 			HttpGet httpGet = new HttpGet(url);
 			DefaultHttpClient httpclient = new DefaultHttpClient();
 			HttpResponse response = httpclient.execute(httpGet);
 			resultContent = new Utf8ResponseHandler().handleResponse(response);
-			System.out.println("result of executeGetToke = " + resultContent);
 
 		} catch (Exception e) {
 			e.printStackTrace();

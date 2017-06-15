@@ -1,7 +1,6 @@
 package com.bt.ommvets.util;
 
 import com.bt.ommvets.consts.QyApi;
-import com.bt.ommvets.consts.WxConfig;
 import com.bt.ommvets.entity.AccessToken;
 
 /**
@@ -10,9 +9,10 @@ import com.bt.ommvets.entity.AccessToken;
  */
 public class AccessTokenUtil {
 
-    public static AccessToken getAccessToken() {
-        String url= QyApi.GetAccessTokenUrl.replace("CORPID", WxConfig.CORPID).replace("CORPSECRET", WxConfig.CORPSECRET);
-        String resultContent = HttpUtil.executeGetToken(url);
+
+    public static AccessToken getAccessToken(String corpid,String secret) {
+        String url= QyApi.GetAccessTokenUrl.replace("CORPID", corpid).replace("CORP_ALARM_SECRET", secret);
+        String resultContent = HttpUtil.executeGet(url);
         return AccessToken.fromJson(resultContent);
     }
 }
